@@ -11,10 +11,12 @@ class SubReg(object):
         return (self._reg.get(read) >> self._start_bit) & self._bitmask
 
     def set(self, value, write=True):
+        print("bit%d val=%s w=%s"%(self._start_bit,str(value),write))
         reg_value = self._reg.get(False)
         reg_value &= ~(self._bitmask << self._start_bit)
         reg_value |= (value & self._bitmask) << self._start_bit
         self._reg.set(reg_value, write)
+
 
     def __call__(self):
         return self.get()

@@ -69,12 +69,23 @@ class App(object):
             self._logger.warning('MPR121 is not configured, calling config_regs()!')
             self.mpr121.config_regs()
         try:
+            last_text = text = ''
             while True:
                 self._update_electrodes()
+                last_text = text
+                text = '|'
+
+                for i in self.electrodes.electrodes:
+                    x  = 'X' if i.is_touched() else ' '
+                    text = "%s%s|"%(text,x)
+                if last_text !=  text:
+                    self._logger.info(text)
+                '''
                 for i in self.electrodes.get_newly_touched():
                     self._logger.info('E_%02d touched!', i.index)
                 for i in self.electrodes.get_newly_released():
-                    self._logger.info('E_%02d released!', i.index)
+                    self._logger.info('E_%02d released!', i.index) 
+                '''
         except KeyboardInterrupt:
             pass
 

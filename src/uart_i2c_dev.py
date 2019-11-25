@@ -31,6 +31,8 @@ class UartI2cDev(object):
         self._write(reg_address, size=size)
         data = self._uart.read_until(self._UART_TERMINATOR)[:-1]
         self._logger.debug('uart: read(%s) -> "%s"', len(data), data)
+        if len(data) % 2 != 0 :
+            data = b'0'+data
         try:
             data = binascii.unhexlify(data)
         except binascii.Error:

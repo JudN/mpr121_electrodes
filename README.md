@@ -29,3 +29,7 @@ git clone https://github.com/takarotech/mpr121_electrodes.git
 ## Enjoy!
 Qni team
 
+
+Jud's notes:
+app.mpr121.regs.auto_configuration.set()
+
